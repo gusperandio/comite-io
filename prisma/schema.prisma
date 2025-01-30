@@ -14,21 +14,27 @@ datasource db {
 }
 
 model DemandData {
-  id              Int      @id @default(autoincrement()) // Auto-incrementing ID
-  key             String  
-  project         String
-  type            String
-  who             String
-  supp            String
-  demand          String
-  analist         String
-  aprov           String
-  dev             String
-  test            String
-  date            String
-  imp             String?
-  show            Boolean
-  usersApproved   String?
-  usersRefused    String?
-  usersIndifferent String?
+  id               Int         @id @default(autoincrement())
+  project          String
+  type             String
+  who              String
+  supp             String
+  demand           String
+  analist          String
+  aprov            String
+  dev              String
+  test             String
+  date             String
+  usersApproved    String[]
+  usersRefused     String[]
+  usersIndifferent String[]
+  controlDataId    Int
+  controlData      ControlData @relation(fields: [controlDataId], references: [id])
+}
+
+model ControlData {
+  id          Int          @id @default(autoincrement())
+  initialDate DateTime
+  finalDate   DateTime
+  demandData  DemandData[]
 }
