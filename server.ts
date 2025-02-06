@@ -10,7 +10,7 @@ app.register(cors, {
   methods: ['*']
 });
 
-app.register(demandRoutes, { prefix: '/api/v1/demand' });
+app.register(demandRoutes, { prefix: '/api/v1/demands' });
 
 // Create HTTP server through Fastify
 const server = app.server;

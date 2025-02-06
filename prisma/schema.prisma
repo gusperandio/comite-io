@@ -36,5 +36,6 @@ model ControlData {
   id          Int          @id @default(autoincrement())
   initialDate DateTime
   finalDate   DateTime
+  open        Boolean      @default(false)
   demandData  DemandData[]
 }
