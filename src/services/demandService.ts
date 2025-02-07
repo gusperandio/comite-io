@@ -1,15 +1,26 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { ControlDataType } from "../types/ControlData";
+import { EndOfYear, StartOfYear } from "../util/tools";
 
 const prisma = new PrismaClient();
-export async function getAllDemands() {
-  return await prisma.controlData.findMany();
+export async function selectAllControls() { 
+  return await prisma.controlData.findMany({
+    where: {
+      finalDate: {
+        gte: StartOfYear,
+        lte: EndOfYear,
+      },
+    },
+    include: {
+      demandData: true,
+    },
+  });
 }
 
 export async function createControl(
   content: ControlDataType
 ): Promise<boolean | unknown> {
-  try { 
+  try {
     await prisma.controlData.create({
       data: {
         initialDate: new Date(

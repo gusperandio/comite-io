@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { selectDemands, insertDemands } from "../controllers/demand.controller";
+import { getAllControls, insertControl } from "../controllers/control.controller";
 
 export default async function demandRoutes(fastify: FastifyInstance) {
-  fastify.get("", selectDemands);
+  fastify.get("", getAllControls);
 
-  fastify.post("", insertDemands);
+  fastify.post("", insertControl);
 }
